@@ -1,15 +1,19 @@
-import {createPool} from "mysql2/promise";
+import { createPool } from "mysql2/promise";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const getConnection = async () => {
-    try {
-        const pool = createPool({
-            host: "localhost",
-            user: "root",
-            password: "",
-            database: "capstone-fintrack"
-        });
-        return pool;
-    } catch (err) {
-        console.log(err)
-    }
-}
+  try {
+    const pool = createPool({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+
+    return pool;
+  } catch (err) {
+    console.log(err);
+  }
+};
