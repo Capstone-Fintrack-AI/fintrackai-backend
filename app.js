@@ -21,7 +21,9 @@ app.use(cors({
 // configure router
 app.use('/auth', AuthRouter);
 app.use('/pemasukan', PemasukanRouter);
-
+app.get("/", (req, res) => {
+  res.send("Backend Fintrack AI berhasil berjalan 🚀");
+});
 app.listen(8080, () => {
     console.log("Server running on port 8080")
 })
