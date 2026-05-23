@@ -102,3 +102,17 @@ export const getPemasukanByUserIdModel = async (user_id) => {
 
     return rows;
 };
+
+export const getTotalPemasukanModel = async (user_id) => {
+
+  const db = await getConnection();
+
+  const [rows] = await db.execute(
+    `SELECT SUM(jumlah) AS total_pemasukan
+     FROM pemasukan 
+     WHERE user_id = ?`,
+    [user_id]
+  );
+
+  return rows;
+};

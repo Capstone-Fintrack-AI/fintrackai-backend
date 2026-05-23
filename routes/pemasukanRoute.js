@@ -6,7 +6,8 @@ import {
     getPemasukanById,
     updatePemasukan,
     deletePemasukan,
-    getPemasukanByUserId
+    getPemasukanByUserId,
+    getTotalPemasukan
 } from "../controllers/pemasukanController.js";
 
 const router = express.Router();
@@ -28,6 +29,9 @@ router.put("/:id", updatePemasukan);
 
 // DELETE
 router.delete("/:id", deletePemasukan);
+
+// GET total pemasukan
+router.get('/total/:user_id', getTotalPemasukan);
 
 
 

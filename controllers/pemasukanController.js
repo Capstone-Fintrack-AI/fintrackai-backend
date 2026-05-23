@@ -5,6 +5,7 @@ import {
     updatePemasukanModel,
     deletePemasukanModel,
     getPemasukanByUserIdModel,
+    getTotalPemasukanModel,
 } from "../models/pemasukanModel.js";
 
 // CREATE
@@ -167,4 +168,28 @@ export const getPemasukanByUserId = async (req, res) => {
             message: err.message
         });
     }
+};
+
+// GET total pemasukan by user id
+export const getTotalPemasukan= async (req, res) => {
+
+  try {
+
+    const { user_id } = req.params;
+
+    const result = await getTotalPemasukanModel(user_id);
+
+    res.status(200).json({
+      success: true,
+      total_pemasukan: result[0].total_pemasukan || 0
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
 };
