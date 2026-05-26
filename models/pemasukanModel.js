@@ -6,15 +6,16 @@ export const createPemasukanModel = async (data) => {
 
     const query = `
         INSERT INTO pemasukan
-        (user_id, nama_pemasukan, sumber_pemasukan, jumlah)
-        VALUES (?, ?, ?, ?)
+        (user_id, nama_pemasukan, sumber_pemasukan, jumlah, tanggal)
+        VALUES (?, ?, ?, ?, ?)
     `;
 
     const values = [
         data.user_id,
         data.nama_pemasukan,
         data.sumber_pemasukan,
-        data.jumlah
+        data.jumlah,
+        data.tanggal
     ];
 
     const [result] = await pool.execute(query, values);
@@ -57,7 +58,8 @@ export const updatePemasukanModel = async (id, data) => {
             user_id = ?,
             nama_pemasukan = ?,
             sumber_pemasukan = ?,
-            jumlah = ?
+            jumlah = ?,
+            tanggal = ?
         WHERE id = ?
     `;
 
@@ -66,6 +68,7 @@ export const updatePemasukanModel = async (id, data) => {
         data.nama_pemasukan,
         data.sumber_pemasukan,
         data.jumlah,
+        data.tanggal,
         id
     ];
 

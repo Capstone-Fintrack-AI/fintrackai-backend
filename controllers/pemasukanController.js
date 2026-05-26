@@ -16,11 +16,12 @@ export const createPemasukan = async (req, res) => {
             user_id: req.body.user_id,
             nama_pemasukan: req.body.nama_pemasukan,
             sumber_pemasukan: req.body.sumber_pemasukan,
-            jumlah: req.body.jumlah
+            jumlah: req.body.jumlah,
+            tanggal: req.body.tanggal
         };
 
         // VALIDASI
-        if (!data.user_id || !data.nama_pemasukan || !data.jumlah) {
+        if (!data.user_id || !data.nama_pemasukan || !data.jumlah || !data.tanggal) {
             return res.status(400).json({
                 message: "Data wajib diisi"
             });
@@ -95,7 +96,8 @@ export const updatePemasukan = async (req, res) => {
             user_id: req.body.user_id,
             nama_pemasukan: req.body.nama_pemasukan,
             sumber_pemasukan: req.body.sumber_pemasukan,
-            jumlah: req.body.jumlah
+            jumlah: req.body.jumlah,
+            tanggal: req.body.tanggal
         };
 
         const result = await updatePemasukanModel(

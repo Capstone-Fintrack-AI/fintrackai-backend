@@ -10,6 +10,7 @@ const app = express();
 import AuthRouter from './routes/authRoute.js';
 import PemasukanRouter from './routes/pemasukanRoute.js';
 import pengeluaranRoute from './routes/pengeluaranRoute.js';
+import targetTabunganRoute from './routes/targetTabunganRoute.js';
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -23,6 +24,7 @@ app.use(cors({
 app.use('/auth', AuthRouter);
 app.use('/pemasukan', PemasukanRouter);
 app.use('/pengeluaran', pengeluaranRoute);
+app.use('/target-tabungan', targetTabunganRoute);
 
 app.get("/", (req, res) => {
   res.send("Backend Fintrack AI berhasil berjalan 🚀");
