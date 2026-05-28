@@ -11,6 +11,7 @@ import AuthRouter from './routes/authRoute.js';
 import PemasukanRouter from './routes/pemasukanRoute.js';
 import pengeluaranRoute from './routes/pengeluaranRoute.js';
 import targetTabunganRoute from './routes/targetTabunganRoute.js';
+import tabunganRoute from "./routes/tambahTabunganRoute.js";
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use('/auth', AuthRouter);
 app.use('/pemasukan', PemasukanRouter);
 app.use('/pengeluaran', pengeluaranRoute);
 app.use('/target-tabungan', targetTabunganRoute);
+app.use( "/api", tabunganRoute );
 
 app.get("/", (req, res) => {
   res.send("Backend Fintrack AI berhasil berjalan 🚀");
