@@ -159,10 +159,11 @@ export const getTotalTabunganById = async (
     const data =
       await getTotalDialokasikanById(id);
 
-    res.json({
+    return res.json({
       success: true,
-      total: totalTabungan
+      data,
     });
+    
   } catch (error) {
     return res.status(500).json({
       success: false,
