@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser"
 import cors from "cors"
 import morgan from "morgan"
+import path from "path";
 
 
 const app = express();
@@ -14,12 +15,12 @@ import targetTabunganRoute from './routes/targetTabunganRoute.js';
 import tabunganRoute from "./routes/tambahTabunganRoute.js";
 import aiRoute from "./routes/aiRoute.js";
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors({
-    methods : ["GET", "POST", "PUT", "DELETE"],
-    origin : "*"
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "*"
 }));
 
 // configure router
@@ -27,12 +28,15 @@ app.use('/auth', AuthRouter);
 app.use('/pemasukan', PemasukanRouter);
 app.use('/pengeluaran', pengeluaranRoute);
 app.use('/target-tabungan', targetTabunganRoute);
-app.use( "/api", tabunganRoute );
+app.use("/api", tabunganRoute);
 app.use("/api", aiRoute);
-app.use("/uploads", express.static("uploads"));
+app.use(
+    "/uploads",
+    express.static(path.join(process.cwd(), "uploads"))
+);
 
 app.get("/", (req, res) => {
-  res.send("Backend Fintrack AI berhasil berjalan 🚀");
+    res.send("Backend Fintrack AI berhasil berjalan 🚀");
 });
 app.listen(8080, () => {
     console.log("Server running on port 8080")
