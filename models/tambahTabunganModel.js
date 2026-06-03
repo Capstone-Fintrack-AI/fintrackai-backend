@@ -79,9 +79,11 @@ export const getTotalDialokasikanById = async (id) => {
 
   const [rows] = await db.query(
     `
-    SELECT COALESCE(jumlah_terkumpul,0) AS total
-    FROM target_tabungan
-    WHERE id = ?
+     SELECT COALESCE(SUM(dt.nominal),0) AS total
+      FROM detail_tabungan dt
+      JOIN target_tabungan tt
+        ON dt.target_tabungan_id = tt.id
+      WHERE tt.user_id = ?
     `,
     [id]
   );
