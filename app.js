@@ -29,6 +29,7 @@ app.use('/pengeluaran', pengeluaranRoute);
 app.use('/target-tabungan', targetTabunganRoute);
 app.use( "/api", tabunganRoute );
 app.use("/api", aiRoute);
+app.use("/uploads", express.static("uploads"));
 
 app.get("/", (req, res) => {
   res.send("Backend Fintrack AI berhasil berjalan 🚀");
