@@ -5,6 +5,7 @@ import {
   insertDetailTabungan,
   updateJumlahTerkumpul,
   getLastThreeSavings,
+  getTotalDialokasikanById,
 } from "../models/tambahTabunganModel.js";
 
 // tambah dana
@@ -140,6 +141,28 @@ export const predictTabungan = async (
       prediction: aiResult.data,
     });
 
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const getTotalTabunganById = async (
+  req,
+  res
+) => {
+  try {
+    const { id } = req.params;
+
+    const data =
+      await getTotalDialokasikanById(id);
+
+    return res.json({
+      success: true,
+      data,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,

@@ -72,3 +72,19 @@ export const getLastThreeSavings = async (
 
   return rows;
 };
+
+// total dana yang sudah dialokasikan
+export const getTotalDialokasikanById = async (id) => {
+  const db = await getConnection();
+
+  const [rows] = await db.query(
+    `
+    SELECT COALESCE(jumlah_terkumpul,0) AS total
+    FROM target_tabungan
+    WHERE id = ?
+    `,
+    [id]
+  );
+
+  return rows[0];
+};
