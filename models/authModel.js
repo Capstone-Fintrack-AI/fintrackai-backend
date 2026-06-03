@@ -30,7 +30,10 @@ export const updateUser = async (data) => {
 
     let query = `
       UPDATE users
-      SET fullname = ?, email = ?
+SET fullname = ?, email = ?,
+    password = COALESCE(?, password),
+    photo = COALESCE(?, photo)
+WHERE id = ?
   `;
 
     const params = [
