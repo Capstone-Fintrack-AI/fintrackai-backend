@@ -143,40 +143,54 @@ export const getUserController = async (req, res) => {
 };
 
 export const updateUserController = async (req, res) => {
-  try {
+    try {
 
-    let hashedPassword = null;
+        let hashedPassword = null;
 
-    if (req.body.password) {
-      hashedPassword = await bcrypt.hash(
-        req.body.password,
-        10
-      );
+        if (req.body.password) {
+            hashedPassword = await bcrypt.hash(req.body.password, 10);
+        }
+
+        // 🔥 CEK FILE DI SINI (TAMBAHAN BARU)
+        if (req.file) {
+            const fs = await import("fs");
+            const path = await import("path");
+
+            const filePath = path.join(
+                process.cwd(),
+                "uploads/profile",
+                req.file.filename
+            );
+
+            if (!fs.existsSync(filePath)) {
+                return res.status(500).json({
+                    success: false,
+                    message: "File gagal tersimpan di server",
+                });
+            }
+        }
+
+        const data = {
+            id: req.params.id,
+            fullname: req.body.fullname,
+            email: req.body.email,
+            password: hashedPassword,
+            photo: req.file ? req.file.filename : null,
+        };
+
+        await updateUser(data);
+
+        return res.json({
+            success: true,
+            message: "Profil berhasil diperbarui",
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
     }
-
-    const data = {
-      id: req.params.id,
-      fullname: req.body.fullname,
-      email: req.body.email,
-      password: hashedPassword,
-      photo: req.file
-        ? req.file.filename
-        : null,
-    };
-
-    await updateUser(data);
-
-    return res.json({
-      success: true,
-      message: "Profil berhasil diperbarui",
-    });
-
-  } catch (error) {
-
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-
-  }
 };
