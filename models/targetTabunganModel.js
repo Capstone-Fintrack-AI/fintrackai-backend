@@ -80,11 +80,21 @@ export const updateTargetTabungan = async (id, data) => {
 
 
 // DELETE TARGET
+// DELETE TARGET
 export const deleteTargetTabungan = async (id) => {
   const db = await getConnection();
 
+  // hapus semua histori tabungan
+  await db.execute(
+    `DELETE FROM detail_tabungan
+     WHERE target_tabungan_id = ?`,
+    [id]
+  );
+
+  // hapus target
   const [result] = await db.execute(
-    `DELETE FROM target_tabungan WHERE id = ?`,
+    `DELETE FROM target_tabungan
+     WHERE id = ?`,
     [id]
   );
 
