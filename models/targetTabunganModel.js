@@ -5,6 +5,11 @@ import { getConnection } from '../config/database.js';
 export const createTargetTabungan = async (data) => {
   const db = await getConnection();
 
+  const status =
+    Number(data.jumlah_terkumpul) >= Number(data.jumlah_target)
+      ? "selesai"
+      : "proses";
+
   const query = `
     INSERT INTO target_tabungan
     (user_id, nama_target, jumlah_target, jumlah_terkumpul, status)
@@ -16,7 +21,7 @@ export const createTargetTabungan = async (data) => {
     data.nama_target,
     data.jumlah_target,
     data.jumlah_terkumpul || 0,
-    data.status || 'proses'
+    status
   ];
 
   const [result] = await db.execute(query, values);
@@ -55,6 +60,11 @@ export const getTargetById = async (id) => {
 export const updateTargetTabungan = async (id, data) => {
   const db = await getConnection();
 
+  const status =
+    Number(data.jumlah_terkumpul) >= Number(data.jumlah_target)
+      ? "selesai"
+      : "proses";
+
   const query = `
     UPDATE target_tabungan
     SET
@@ -69,7 +79,7 @@ export const updateTargetTabungan = async (id, data) => {
     data.nama_target,
     data.jumlah_target,
     data.jumlah_terkumpul,
-    data.status,
+    status,
     id
   ];
 

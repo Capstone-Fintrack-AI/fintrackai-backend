@@ -72,6 +72,7 @@ export const getTarget = async (req, res) => {
 export const updateTarget = async (req, res) => {
   try {
 
+    console.log("REQ BODY:", req.body);
     const data = req.body;
 
     data.status =
