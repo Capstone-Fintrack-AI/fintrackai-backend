@@ -72,14 +72,21 @@ export const getTarget = async (req, res) => {
 export const updateTarget = async (req, res) => {
   try {
 
+    const data = req.body;
+
+    data.status =
+      Number(data.jumlah_terkumpul) >= Number(data.jumlah_target)
+        ? "selesai"
+        : "proses";
+
     const result = await updateTargetTabungan(
       req.params.id,
-      req.body
+      data
     );
 
     res.status(200).json({
       success: true,
-      message: 'Target berhasil diupdate',
+      message: "Target berhasil diupdate",
       data: result
     });
 
