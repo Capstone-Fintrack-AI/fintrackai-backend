@@ -136,23 +136,9 @@ npm start
 Server akan berjalan pada:
 
 ```bash
-http://localhost:5000
+http://localhost:8080
 ```
 
-Contoh endpoint:
-
-```bash
-POST /api/login
-POST /api/register
-GET  /api/user/:id
-PUT  /api/user/:id
-GET  /api/transaksi
-POST /api/transaksi
-GET  /api/goals
-POST /api/goals
-```
-
----
 
 # 📌 Catatan
 
