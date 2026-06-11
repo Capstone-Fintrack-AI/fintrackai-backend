@@ -93,12 +93,12 @@ export const updatePemasukan = async (req, res) => {
     try {
 
         const data = {
-            user_id: req.body.user_id,
-            nama_pemasukan: req.body.nama_pemasukan,
-            sumber_pemasukan: req.body.sumber_pemasukan,
-            jumlah: req.body.jumlah,
-            tanggal: req.body.tanggal
-        };
+    user_id: req.body.user_id ?? null,
+    nama_pemasukan: req.body.nama_pemasukan ?? null,
+    sumber_pemasukan: req.body.sumber_pemasukan ?? null,
+    jumlah: req.body.jumlah ?? 0,
+    tanggal: req.body.tanggal ?? null
+};
 
         const result = await updatePemasukanModel(
             req.params.id,
